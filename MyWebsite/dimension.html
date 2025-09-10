@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pasko ng mga Chismosa</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.75), rgba(219,234,254,0.75));
+      overflow-y: auto;
+      min-height: 100vh;
+      text-align: center;
+      position: relative;
+    }
+
+    /* ❄ Snowflakes */
+    .snowflake {
+      position: absolute;
+      top: -10%;
+      color: black;
+      animation: fall linear infinite;
+      text-shadow: 0 0 6px rgba(0,0,0,0.4);
+      pointer-events: none;
+      z-index: 1;
+    }
+    @keyframes fall { to { transform: translateY(110vh); } }
+
+    h1 {
+      font-size: 40px;
+      color: #b91c1c;
+      margin-top: 20px;
+      text-shadow: 0 0 10px white, 0 0 20px #f87171;
+      z-index: 5;
+      position: relative;
+      animation: fadeIn 1s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Rows */
+    .row {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin: 30px 0;
+      z-index: 5;
+      position: relative;
+      opacity: 0;              
+      animation: fadeUp 0.7s forwards;
+    }
+    .row1 { animation-delay: 0.2s; }
+    .row2 { animation-delay: 0.4s; }
+    .row3 { animation-delay: 0.6s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Round images */
+    .row img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .row img:hover {
+      transform: scale(1.25);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+
+    /* Slideshow container */
+    .slideshow {
+      position: relative;
+      width: 90%;
+      max-width: 1200px;
+      margin: 50px auto;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+      opacity: 0;
+      animation: fadeUp 1s forwards;
+      animation-delay: 0.8s;
+    }
+
+    .slides {
+      display: none;
+      width: 100%;
+      height: auto;
+    }
+    .active {
+      display: block;
+      animation: fadeSlide 0.8s ease;
+    }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: scale(1.05); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Arrows */
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 12px;
+      color: white;
+      font-weight: bold;
+      font-size: 24px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.4);
+      user-select: none;
+      transition: background 0.3s;
+    }
+    .prev:hover, .next:hover { background: rgba(0,0,0,0.7); }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    /* Back button */
+    .back {
+      display: inline-block;
+      margin: 40px auto;
+      padding: 12px 25px;
+      font-size: 18px;
+      background: #dc2626;
+      color: white;
+      border-radius: 25px;
+      text-decoration: none;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+      transition: 0.2s ease;
+      cursor: pointer;
+    }
+    .back:hover { transform: scale(1.05); background: #ef4444; }
+
+    /* Modal */
+    #modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+    #modal img {
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: 15px;
+      box-shadow: 0 0 30px #fff;
+      transition: transform 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <h1>PASKO NG MGA CHISMOSA 🎄</h1>
+
+  <!-- Row 1 -->
+  <div class="row row1">
+    <img src="space1.jpg" alt="Friend">
+  </div>
+
+  <!-- Row 2 -->
+  <div class="row row2">
+    <img src="space2.jpg" alt="Friend">
+    <img src="space3.jpg" alt="Friend">
+  </div>
+
+  <!-- Row 3 -->
+<div class="row row3">
+  <img src="space4.jpg" alt="Friend">
+  <img src="space5.jpg" alt="Friend">
+  <img src="space6.jpg" alt="Friend">
+  <img src="space10.jpg" alt="Friend">
+</div>
+
+
+  <!-- Bottom slideshow -->
+  <div class="slideshow">
+    <img class="slides active" src="space7.jpg" alt="Slide 1">
+    <img class="slides" src="space8.jpg" alt="Slide 2">
+    <img class="slides" src="space9.jpg" alt="Slide 3">
+
+    <!-- Arrows -->
+    <a class="prev">&#10094;</a>
+    <a class="next">&#10095;</a>
+  </div>
+
+  <a class="back" href="index.html">⬅ Back</a>
+
+  <!-- Modal -->
+  <div id="modal">
+    <img id="modalImg" src="" alt="Popup Image">
+  </div>
+
+  <script>
+    // ❄ Snowflake generator
+    function createSnowflake() {
+      const el = document.createElement('div');
+      el.className = 'snowflake';
+      el.textContent = '❄';
+      el.style.left = Math.random() * 100 + 'vw';
+      const size = 10 + Math.random() * 28;
+      el.style.fontSize = size + 'px';
+      el.style.animationDuration = (5 + Math.random() * 8) + 's';
+      el.style.opacity = 0.7 + Math.random() * 0.3;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 14000);
+    }
+    setInterval(createSnowflake, 200);
+    for (let i = 0; i < 14; i++) createSnowflake();
+
+    // 🔍 Click-to-zoom modal
+    const images = document.querySelectorAll('.row img, .slideshow img');
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+
+    images.forEach(img => {
+      img.addEventListener('click', () => {
+        modalImg.src = img.src;
+        modal.style.display = 'flex';
+        modalImg.style.transform = 'scale(0.5)';
+        setTimeout(() => modalImg.style.transform = 'scale(1)', 50);
+      });
+    });
+    modal.addEventListener('click', () => { modal.style.display = 'none'; });
+
+    // ▶ Slideshow logic
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.slides');
+    const prev = document.querySelector('.prev');
+    const next = document.querySelector('.next');
+
+    function showSlide(n) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        if (i === n) slide.classList.add('active');
+      });
+    }
+
+    prev.addEventListener('click', () => {
+      slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+      showSlide(slideIndex);
+    });
+
+    next.addEventListener('click', () => {
+      slideIndex = (slideIndex + 1) % slides.length;
+      showSlide(slideIndex);
+    });
+  </script>
+</body>
+</html>
